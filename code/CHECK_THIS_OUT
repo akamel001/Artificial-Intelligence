@@ -1,0 +1,47 @@
+[voigt@jb349 cs512]$ alisp
+International Allegro CL Enterprise Edition
+8.0 [Linux (x86)] (Dec 30, 2005 9:49)
+Copyright (C) 1985-2005, Franz Inc., Oakland, CA, USA.  All Rights Reserved.
+
+This development copy of Allegro CL is licensed to:
+   [TC15171] California State, San Bernadino
+
+;; Optimization settings: safety 1, space 1, speed 1, debug 2.
+;; For a complete description of all compiler switches given the current
+;; optimization settings evaluate (EXPLAIN-COMPILER-SETTINGS).
+CL-USER(1): (setq x '(a b c d))
+(A B C D)
+CL-USER(2): (setq y x)
+(A B C D)
+CL-USER(3): (setq x (cdr x))
+(B C D)
+CL-USER(4): x
+(B C D)
+CL-USER(5): y
+(A B C D)
+CL-USER(6): (setf (second x) 5)
+5
+CL-USER(7): 
+CL-USER(7): 
+CL-USER(7): x
+(B 5 D)
+CL-USER(8): y
+(A B 5 D)
+CL-USER(9): (setf (first y) 3)
+3
+CL-USER(10): y
+(3 B 5 D)
+CL-USER(11): x
+(B 5 D)
+CL-USER(12): (setf (fourth y) 7)
+7
+CL-USER(13): y
+(3 B 5 7)
+CL-USER(14): x
+(B 5 7)
+
+CL-USER(16): (setq x (append x '(x y z)))
+(B 5 7 X Y Z)
+CL-USER(17): y
+(3 B 5 7)
+

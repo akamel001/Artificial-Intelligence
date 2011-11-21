@@ -1,0 +1,132 @@
+Script started on Thu 18 Feb 2010 01:16:05 PM PST
+[voigt@jb359-0 cs512]$ alisp
+International Allegro CL Enterprise Edition
+8.0 [Linux (x86)] (Dec 30, 2005 9:49)
+Copyright (C) 1985-2005, Franz Inc., Oakland, CA, USA.  All Rights Reserved.
+
+This development copy of Allegro CL is licensed to:
+   [TC15171] California State, San Bernadino
+
+;; Optimization settings: safety 1, space 1, speed 1, debug 2.
+;; For a complete description of all compiler switches given the
+;; current optimization settings evaluate (EXPLAIN-COMPILER-SETTINGS).
+Warning: Terminal driver is stripping 8th bit from input.  To accept
+         8-bit input, run the lisp function (set-8-bit-input).  This is
+         equivalent to executing `stty -istrip' from the shell.
+CL-USER(1): :ld gs.lisp\ 
+; Loading /pool/faculty/voigt/cs512/gs.lisp
+;   Loading /pool/faculty/voigt/cs512/utils.lisp
+CL-USER(2): :ld twocolor.co  lisp
+; Loading /pool/faculty/voigt/cs512/twocolor.lisp
+;   Loading /pool/faculty/voigt/cs512/neighs.lisp
+CL-USER(3): (itgs prob1)
+
+0. OPEN:
+((R R B) (R B B) (B B R)) [0+0, NIL]
+
+
+1. OPEN:
+((B R B) (R B B) (B B R)) [1+4, 0]
+((R R B) (R B R) (B B R)) [1+5, 0]
+((R R B) (R B B) (B R R)) [1+5, 0]
+((R R B) (R R B) (B B R)) [1+6, 0]
+((R R R) (R B B) (B B R)) [1+6, 0]
+((R R B) (R B B) (R B R)) [1+6, 0]
+((R B B) (R B B) (B B R)) [1+7, 0]
+((R R B) (B B B) (B B R)) [1+7, 0]
+((R R B) (R B B) (B B B)) [1+8, 0]
+
+
+2. OPEN:
+((B R B) (R B B) (B R R)) [2+3, 8]
+((B R B) (R B R) (B B R)) [2+3, 8]
+((B R R) (R B B) (B B R)) [2+4, 8]
+((B R B) (R R B) (B B R)) [2+4, 8]
+((B R B) (R B B) (R B R)) [2+4, 8]
+((R R B) (R B B) (B R R)) [1+5, 0]
+((R R B) (R B R) (B B R)) [1+5, 0]
+((R R B) (R B B) (R B R)) [1+6, 0]
+((R R R) (R B B) (B B R)) [1+6, 0]
+((R R B) (R R B) (B B R)) [1+6, 0]
+((B R B) (R B B) (B B B)) [2+6, 8]
+((R R B) (B B B) (B B R)) [1+7, 0]
+((R B B) (R B B) (B B R)) [1+7, 0]
+((B B B) (R B B) (B B R)) [2+7, 8]
+((B R B) (B B B) (B B R)) [2+7, 8]
+((R R B) (R B B) (B B B)) [1+8, 0]
+
+
+3. OPEN:
+((B R B) (R B R) (B R R)) [3+2, 17]
+((B R B) (R B R) (B B R)) [2+3, 8]
+((B R R) (R B B) (B R R)) [3+3, 17]
+((B R B) (R B B) (B R B)) [3+3, 17]
+((R R B) (R B R) (B B R)) [1+5, 0]
+((R R B) (R B B) (B R R)) [1+5, 0]
+((B R B) (R B B) (R B R)) [2+4, 8]
+((B R B) (R R B) (B B R)) [2+4, 8]
+((B R R) (R B B) (B B R)) [2+4, 8]
+((R R B) (R R B) (B B R)) [1+6, 0]
+((R R R) (R B B) (B B R)) [1+6, 0]
+((R R B) (R B B) (R B R)) [1+6, 0]
+((B R B) (R R B) (B R R)) [3+5, 17]
+((B R B) (R B B) (R R R)) [3+5, 17]
+((R B B) (R B B) (B B R)) [1+7, 0]
+((R R B) (B B B) (B B R)) [1+7, 0]
+((B R B) (R B B) (B B B)) [2+6, 8]
+((B B B) (R B B) (B R R)) [3+6, 17]
+((B R B) (B B B) (B R R)) [3+6, 17]
+((R R B) (R B B) (B B B)) [1+8, 0]
+((B R B) (B B B) (B B R)) [2+7, 8]
+((B B B) (R B B) (B B R)) [2+7, 8]
+
+
+4. OPEN:
+((B R B) (R B R) (B R B)) [4+0, 26]
+((B R B) (R B R) (B B R)) [2+3, 8]
+((B R R) (R B B) (B B R)) [2+4, 8]
+((B R B) (R R B) (B B R)) [2+4, 8]
+((B R B) (R B B) (R B R)) [2+4, 8]
+((R R B) (R B B) (B R R)) [1+5, 0]
+((R R B) (R B R) (B B R)) [1+5, 0]
+((B R B) (R B B) (B R B)) [3+3, 17]
+((B R R) (R B B) (B R R)) [3+3, 17]
+((R R B) (R B B) (R B R)) [1+6, 0]
+((R R R) (R B B) (B B R)) [1+6, 0]
+((R R B) (R R B) (B B R)) [1+6, 0]
+((R R B) (R B R) (B R R)) [4+4, 26]
+((B R R) (R B R) (B R R)) [4+4, 26]
+((B R B) (R B R) (R R R)) [4+4, 26]
+((B R B) (R B B) (B B B)) [2+6, 8]
+((R R B) (B B B) (B B R)) [1+7, 0]
+((R B B) (R B B) (B B R)) [1+7, 0]
+((B R B) (R B B) (R R R)) [3+5, 17]
+((B R B) (R R B) (B R R)) [3+5, 17]
+((B R B) (B B R) (B R R)) [4+5, 26]
+((B B B) (R B R) (B R R)) [4+5, 26]
+((B B B) (R B B) (B B R)) [2+7, 8]
+((B R B) (B B B) (B B R)) [2+7, 8]
+((R R B) (R B B) (B B B)) [1+8, 0]
+((B R B) (B B B) (B R R)) [3+6, 17]
+((B B B) (R B B) (B R R)) [3+6, 17]
+((B R B) (R R R) (B R R)) [4+6, 26]
+
+
+
+Solution Found!
+
+#S(NODE :ID 29
+        :STATE ((B R B) (R B R) (B R B))
+        :DEPTH 4
+        :H-EVAL 0
+        :PARENT 26)
+
+(((R R B) (R B B) (B B R)) ((B R B) (R B B) (B B R))
+ ((B R B) (R B B) (B R R)) ((B R B) (R B R) (B R R))
+ ((B R B) (R B R) (B R B)))
+CL-USER(4): EOF
+Really exit lisp [n]? y
+; Exiting
+[voigt@jb359-0 cs512]$ exit
+
+Script done on Thu 18 Feb 2010 01:17:14 PM PST

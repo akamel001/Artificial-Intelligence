@@ -1,0 +1,11 @@
+Improvements to ttt.lisp:
+
+(1) Let program not break with 
+    invalid input, but allow
+    reentry.
+
+(2) Improve function respondO:
+    let it detect cases of 
+    2 X's in a row, col, or diag.
+    If found, place O to block
+    triplet.

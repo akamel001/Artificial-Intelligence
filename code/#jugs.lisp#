@@ -1,0 +1,151 @@
+;; jugs.lisp
+;; KV, March 2010; water-jug operatrors as STRIPS ops
+
+(setq *jugops*
+  (list
+   '("jug4-to-jug3-a"
+     (pre ((jug3 x) (jug4 y) #'(lambda (x y)
+				 (and (< x 3) (> y 0) (<= y (- 3 x))))))
+     (add ((jug3 (+ x y)) (jug4 0)))
+     (del ((jug3 x) (jug4 y)))
+     )
+   ))
+
+(defun get-preconds (op)
+  (second (second op)))
+
+(defun get-adds (op)
+  (second (third op)))
+
+(defun get-dels (op)
+  (second (fourth op)))
+
+;; apply preconditions to state; either fail, or succeed with possible
+;; list of variable bindings ("unification lite");
+
+(defun apply-pre (pre state)
+  (let (
+	(currstate state)
+	preds
+	test
+	statep
+	binds
+	fail
+	)
+    (setq preds (reverse (cdr (reverse pre))))
+    (setq test (eval (car (reverse pre))))
+    
+    (dolist (p preds)
+      (if (setq statep (member p currstate
+			       :test #'(lambda (x y)
+					 (equal (car x) (car y)))))
+	  (progn
+	    (setq statep (car statep))
+	    (setq binds (append binds
+				(mapcar #'cons (cdr p) (cdr statep))))
+	    (setq binds (remove-if #'(lambda (x)
+				       (equal (car x) (cdr x))) binds))
+	    (setq currstate (apply-bindings binds currstate))
+	    )
+	(progn
+	  (setq fail t)
+	  (return)
+	  ))
+      
+      )
+    ;; 3 cases: (1) fail is t -> preconds not satisfied in state;
+    ;; (2) fail is nil, binds is nil; preconds satisfied in state; ground case;
+    ;; (3) fail is nil, non-nil binds; preconds are satisfied with binds;
+    (if fail
+	'fail
+      (if (null binds)
+	  'succeed
+	(if (apply test (mapcar #'cdr binds))
+	    binds
+	  'fail)))
+    ))
+
+;; apply variables to a list of predicates;
+
+(defun apply-bindings (binds predlst)
+  (let (newpreds
+	)
+    (dolist (pred predlst)
+      (dolist (bnd binds)
+	(if (member (car bnd) pred :test #'contained)
+	    (setq pred (subst (cdr bnd) (car bnd) pred :test #'equal))
+	  )
+	)
+      (setq newpreds (append newpreds (list pred)))
+      )
+    newpreds))
+
+(defun contained (x y)
+  (cond ((not (atom x)) 
+	 nil)
+	((atom y)
+	 (equal x y))
+	((null y)
+	 nil)
+	(t
+	 (or (contained x (car y))
+	     (contained x (cdr y))
+	     ))
+	))
+	    
+;; apply adds to state; generic adds may need to be instantiated 
+;; according to list of bindings;
+
+(defun apply-adds (adds state &optional binds)
+  (let (appadds 
+	newadds
+	)
+    (if binds
+	(setq appadds (apply-bindings binds adds))
+      (setq appadds adds)
+      )
+    (dolist (ad appadds)
+      (dolist (x (cdr ad))
+	(if (listp x)
+	    (setq ad (subst (eval x) x ad :test #'equal)))
+	)
+      (setq newadds (append newadds (list ad)))
+      )
+    (append state newadds)
+    ))
+
+(defun apply-dels (dels state &optional binds)
+  (let (appdels
+	newdels
+	)
+    (if binds
+	(setq appdels (apply-bindings binds dels))
+      (setq appdels dels)
+      )
+    (dolist (del appdels)
+      (dolist (x (cdr del))
+	(if (listp x)
+	    (setq del (subst (eval x) x del :test #'equal)))
+	)
+      (setq newdels (append newdels (list del)))
+      )
+    (dolist (del newdels)
+      (setq state (remove del state :test #'equal))
+      )
+    state))
+
+
+
+		
+	       
+    
+
+
+	    
+			    
+  
+     
+     
+     
+     
+				  
